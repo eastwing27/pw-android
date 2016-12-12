@@ -23,6 +23,8 @@ namespace PW.Android
             SetContentView(Resource.Layout.Register);
 
             FindViewById<TextView>(Resource.Id.edtRegServer).Text = Intent.GetStringExtra("Server") ?? "http://pwings.azurewebsites.net";
+            FindViewById<Button>(Resource.Id.btnRegister).Click += OnRegisterClick;
+            FindViewById<Button>(Resource.Id.btnBackToLogin).Click += (sender, e) => StartActivity(typeof(MainActivity));
         }
 
         private async void OnRegisterClick(object sender, EventArgs e)

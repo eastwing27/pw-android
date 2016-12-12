@@ -78,14 +78,17 @@ namespace PW.Android
 			// aapt resource value: 0x7f050001
 			public const int btnBack = 2131034113;
 			
-			// aapt resource value: 0x7f05001c
-			public const int btnLog = 2131034140;
+			// aapt resource value: 0x7f050014
+			public const int btnBackToLogin = 2131034132;
 			
-			// aapt resource value: 0x7f050019
-			public const int btnRegister = 2131034137;
+			// aapt resource value: 0x7f05001e
+			public const int btnLog = 2131034142;
 			
-			// aapt resource value: 0x7f05001f
-			public const int btnSend = 2131034143;
+			// aapt resource value: 0x7f05001b
+			public const int btnRegister = 2131034139;
+			
+			// aapt resource value: 0x7f050021
+			public const int btnSend = 2131034145;
 			
 			// aapt resource value: 0x7f05000f
 			public const int button1 = 2131034127;
@@ -102,26 +105,29 @@ namespace PW.Android
 			// aapt resource value: 0x7f05000e
 			public const int editText3 = 2131034126;
 			
-			// aapt resource value: 0x7f05001e
-			public const int edtAmount = 2131034142;
+			// aapt resource value: 0x7f050020
+			public const int edtAmount = 2131034144;
 			
-			// aapt resource value: 0x7f05001d
-			public const int edtReceiver = 2131034141;
+			// aapt resource value: 0x7f05001f
+			public const int edtReceiver = 2131034143;
 			
-			// aapt resource value: 0x7f050018
-			public const int edtRegConfirm = 2131034136;
-			
-			// aapt resource value: 0x7f050015
-			public const int edtRegEmail = 2131034133;
-			
-			// aapt resource value: 0x7f050016
-			public const int edtRegName = 2131034134;
+			// aapt resource value: 0x7f05001a
+			public const int edtRegConfirm = 2131034138;
 			
 			// aapt resource value: 0x7f050017
-			public const int edtRegPassword = 2131034135;
+			public const int edtRegEmail = 2131034135;
 			
-			// aapt resource value: 0x7f050014
-			public const int edtRegServer = 2131034132;
+			// aapt resource value: 0x7f050018
+			public const int edtRegName = 2131034136;
+			
+			// aapt resource value: 0x7f050019
+			public const int edtRegPassword = 2131034137;
+			
+			// aapt resource value: 0x7f050016
+			public const int edtRegServer = 2131034134;
+			
+			// aapt resource value: 0x7f050013
+			public const int linearLayout0 = 2131034131;
 			
 			// aapt resource value: 0x7f050000
 			public const int linearLayout1 = 2131034112;
@@ -150,17 +156,17 @@ namespace PW.Android
 			// aapt resource value: 0x7f05000d
 			public const int textView4 = 2131034125;
 			
-			// aapt resource value: 0x7f05001a
-			public const int toolbar1 = 2131034138;
+			// aapt resource value: 0x7f05001c
+			public const int toolbar1 = 2131034140;
 			
 			// aapt resource value: 0x7f050002
 			public const int txtLogHead = 2131034114;
 			
-			// aapt resource value: 0x7f050013
-			public const int txtRegServer = 2131034131;
+			// aapt resource value: 0x7f050015
+			public const int txtRegServer = 2131034133;
 			
-			// aapt resource value: 0x7f05001b
-			public const int txtUserInfo = 2131034139;
+			// aapt resource value: 0x7f05001d
+			public const int txtUserInfo = 2131034141;
 			
 			static Id()
 			{
