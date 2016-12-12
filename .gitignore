@@ -1,0 +1,6 @@
+/.project
+/packages/*
+/pw-android/bin/*
+/pw-android/obj/*
+/Transciever/bin/*
+/Transciever/obj/*
