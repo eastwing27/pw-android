@@ -29,7 +29,13 @@ namespace PW.Android
 
             var updateUsers = App.UpdateUserList();
             updateUsers.Start(); updateUsers.Wait();
-            var receivers = App.Users.Select(u => u.Name).ToArray();
+            var receivers = App.Users
+                .OrderBy(u => u.Name)
+                .Select(u => u.Name)
+                .ToArray();
+
+            var btnSend = FindViewById<Button>(Resource.Id.btnSend);
+            btnSend.Click += OnSendClick;
 
             var edtReceiver = FindViewById<AutoCompleteTextView>(Resource.Id.edtReceiver);
             var acAdapter = new ArrayAdapter(this, Resource.Layout.Send, receivers);
