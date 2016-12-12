@@ -10,20 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
-        <ImageButton
-            android:src="@android:drawable/ic_menu_gallery"
-            android:id="@+id/btnBack"
-            android:background="@drawable/back"
-            android:layout_width="37.0dp"
-            android:layout_height="25.5dp" />
+        <Button
+            android:text="Back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btnBack" />
         <TextView
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/txtLogHead"
-            android:layout_marginLeft="24.0dp"
-            android:layout_marginTop="2.0dp" />
+            android:layout_marginTop="16.0dp"
+            android:layout_marginLeft="10.0dp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -36,9 +35,12 @@
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="614.0dp"
             android:id="@+id/lstLog"
             android:scrollbars="vertical"
-            android:layout_marginTop="13.0dp" />
+            android:layout_marginTop="13.0dp"
+            android:smoothScrollbar="true"
+            android:scrollIndicators="right"
+            android:scrollbarStyle="insideInset" />
     </LinearLayout>
 </LinearLayout>

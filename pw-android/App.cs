@@ -93,14 +93,14 @@ namespace PW.Android
             Users = await Service.GetUserList();
             if (Service.StatusMessage != "ok")
             {
-                Toast.MakeText(CallingContext, $"Update error: {Service.StatusMessage}", ToastLength.Short);
+                Toast.MakeText(CallingContext, $"Update error: {Service.StatusMessage}", ToastLength.Short).Show();
                 return;
             }
 
             var dto = await Service.GetUserInfo(UserId);
             if(dto == null)
             {
-                Toast.MakeText(CallingContext, $"Update error: {Service.StatusMessage}", ToastLength.Short);
+                Toast.MakeText(CallingContext, $"Update error: {Service.StatusMessage}", ToastLength.Short).Show();
                 return;
             }
 

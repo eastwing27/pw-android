@@ -22,7 +22,7 @@ namespace PW.Android
 
             SetContentView(Resource.Layout.Register);
 
-            FindViewById<TextView>(Resource.Id.txtregisterHead).Text = $"@ {App.Service.Server}";
+            FindViewById<TextView>(Resource.Id.edtRegServer).Text = Intent.GetStringExtra("Server") ?? "http://pwings.azurewebsites.net";
         }
 
         private async void OnRegisterClick(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace PW.Android
                 || edtName.Text.Split(' ').Length != 2
                 || string.IsNullOrEmpty(edtName.Text))
             {
-                Toast.MakeText(this, "Please enter valid name in \"Firstname Lastname\" format contains latin letters only", ToastLength.Short);
+                Toast.MakeText(this, "Please enter valid name in \"Firstname Lastname\" format contains latin letters only", ToastLength.Short).Show();
                 return;
             }
 
@@ -46,19 +46,19 @@ namespace PW.Android
                 || !edtEmail.Text.Contains(".") 
                 || edtEmail.Text.Contains(" "))
             {
-                Toast.MakeText(this, "Please enter a valid e-mail", ToastLength.Short);
+                Toast.MakeText(this, "Please enter a valid e-mail", ToastLength.Short).Show();
                 return;
             }
 
             if (string.IsNullOrEmpty(edtPassword.Text))
             {
-                Toast.MakeText(this, "Passwod cannot be empty", ToastLength.Short);
+                Toast.MakeText(this, "Passwod cannot be empty", ToastLength.Short).Show();
                 return;
             }
 
             if (edtPassword.Text != edtConfirm.Text)
             {
-                Toast.MakeText(this, "Passwods does not match!", ToastLength.Short);
+                Toast.MakeText(this, "Passwods does not match!", ToastLength.Short).Show();
                 return;
             }
 
@@ -72,11 +72,11 @@ namespace PW.Android
             var registerSuccessful = await App.TryRegister(json);
             if (!registerSuccessful)
             {
-                Toast.MakeText(this, $"Registration error: {App.Service.StatusMessage}", ToastLength.Short);
+                Toast.MakeText(this, $"Registration error: {App.Service.StatusMessage}", ToastLength.Short).Show();
                 return;
             }
 
-            Toast.MakeText(this, $"Welcome!", ToastLength.Short);
+            Toast.MakeText(this, $"Welcome!", ToastLength.Short).Show();
             StartActivity(typeof(SendActivity));
         }
     }

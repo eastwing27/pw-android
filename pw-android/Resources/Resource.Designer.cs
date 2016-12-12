@@ -50,6 +50,9 @@ namespace PW.Android
 			// aapt resource value: 0x7f020001
 			public const int Icon = 2130837505;
 			
+			// aapt resource value: 0x7f020002
+			public const int log = 2130837506;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -75,8 +78,8 @@ namespace PW.Android
 			// aapt resource value: 0x7f050001
 			public const int btnBack = 2131034113;
 			
-			// aapt resource value: 0x7f050013
-			public const int btnBackToLogin = 2131034131;
+			// aapt resource value: 0x7f05001c
+			public const int btnLog = 2131034140;
 			
 			// aapt resource value: 0x7f050019
 			public const int btnRegister = 2131034137;
@@ -117,6 +120,9 @@ namespace PW.Android
 			// aapt resource value: 0x7f050017
 			public const int edtRegPassword = 2131034135;
 			
+			// aapt resource value: 0x7f050014
+			public const int edtRegServer = 2131034132;
+			
 			// aapt resource value: 0x7f050000
 			public const int linearLayout1 = 2131034112;
 			
@@ -131,9 +137,6 @@ namespace PW.Android
 			
 			// aapt resource value: 0x7f050004
 			public const int lstLog = 2131034116;
-			
-			// aapt resource value: 0x7f05001b
-			public const int relativeLayout1 = 2131034139;
 			
 			// aapt resource value: 0x7f050011
 			public const int textView1 = 2131034129;
@@ -153,11 +156,11 @@ namespace PW.Android
 			// aapt resource value: 0x7f050002
 			public const int txtLogHead = 2131034114;
 			
-			// aapt resource value: 0x7f050014
-			public const int txtRegHead = 2131034132;
+			// aapt resource value: 0x7f050013
+			public const int txtRegServer = 2131034131;
 			
-			// aapt resource value: 0x7f05001c
-			public const int txtUserInfo = 2131034140;
+			// aapt resource value: 0x7f05001b
+			public const int txtUserInfo = 2131034139;
 			
 			static Id()
 			{

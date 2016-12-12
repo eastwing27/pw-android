@@ -18,14 +18,15 @@ namespace PW.Android
     {
         private ListView lstLog;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Log);
 
-            var update = App.UpdateTransactions();
-            update.Start(); update.Wait();
+            await App.UpdateTransactions();
+
+            FindViewById<Button>(Resource.Id.btnBack).Click += (sender, e) => StartActivity(typeof(SendActivity));
 
             if (App.Transactions != null)
             {
@@ -33,10 +34,10 @@ namespace PW.Android
                 var adapter = new Adapters.LogAdapter(this, App.Transactions);
                 lstLog.Adapter = adapter;
                 lstLog.ItemClick += OnListItemClick;
-                Toast.MakeText(this, "Tap on any entry to use it as a template", ToastLength.Short);
+                Toast.MakeText(this, "Tap on any entry to use it as a template", ToastLength.Short).Show();
             }
             else
-                Toast.MakeText(this, App.Service.StatusMessage, ToastLength.Long);
+                Toast.MakeText(this, App.Service.StatusMessage, ToastLength.Long).Show();
         }
 
         void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -46,9 +47,10 @@ namespace PW.Android
             var edtReceiver = FindViewById<EditText>(Resource.Id.edtReceiver);
             var edtAmount = FindViewById<EditText>(Resource.Id.edtAmount);
 
-            edtReceiver.Text = (transact.SenderId == App.UserId) ? transact.ReceiverName : transact.SenderName;
-            edtAmount.Text = transact.Amount.ToString();
-            StartActivity(typeof(SendActivity));
+            var sendActivity = new Intent(this, typeof(SendActivity));
+            sendActivity.PutExtra("Receiver", (transact.SenderId == App.UserId) ? transact.ReceiverName : transact.SenderName);
+            sendActivity.PutExtra("Amount", transact.Amount.ToString());
+            StartActivity(sendActivity);
         }
     }
 }
