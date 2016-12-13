@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
 
 namespace PW.Android
 {
@@ -22,7 +17,9 @@ namespace PW.Android
 
             SetContentView(Resource.Layout.Register);
 
+            //Trying to get server address from login page
             FindViewById<TextView>(Resource.Id.edtRegServer).Text = Intent.GetStringExtra("Server") ?? "http://pwings.azurewebsites.net";
+
             FindViewById<Button>(Resource.Id.btnRegister).Click += OnRegisterClick;
             FindViewById<Button>(Resource.Id.btnBackToLogin).Click += (sender, e) => StartActivity(typeof(MainActivity));
         }
@@ -34,15 +31,17 @@ namespace PW.Android
             var edtPassword = FindViewById<EditText>(Resource.Id.edtRegPassword);
             var edtConfirm = FindViewById<EditText>(Resource.Id.edtRegConfirm);
 
+            //User name validation: it must be two words contains Latin letters only
             const string nameSymbols = " abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             if (!edtName.Text.All(c => nameSymbols.Contains(c)) 
                 || edtName.Text.Split(' ').Length != 2
                 || string.IsNullOrEmpty(edtName.Text))
             {
-                Toast.MakeText(this, "Please enter valid name in \"Firstname Lastname\" format contains latin letters only", ToastLength.Short).Show();
+                Toast.MakeText(this, "Please enter valid name in \"Firstname Lastname\" format contains Latin letters only", ToastLength.Short).Show();
                 return;
             }
 
+            //E-mail address validation
             if (string.IsNullOrEmpty(edtEmail.Text) 
                 || !edtEmail.Text.Contains("@") 
                 || !edtEmail.Text.Contains(".") 
@@ -64,6 +63,15 @@ namespace PW.Android
                 return;
             }
 
+            var edtServer = FindViewById<TextView>(Resource.Id.edtRegServer);
+            if (string.IsNullOrEmpty(edtServer.Text))
+            {
+                Toast.MakeText(this, "You must specify server address", ToastLength.Short).Show();
+                return;
+            }
+            App.Initialize(edtServer.Text);
+
+            //Creating anonymous DTO and serializing it
             var json = JsonConvert.SerializeObject(new
             {
                 Name = edtName.Text,
@@ -71,6 +79,8 @@ namespace PW.Android
                 PasswordHash = edtPassword.Text.GetPasswordHash()
             });
 
+            //Trying to register using entered data
+            Toast.MakeText(this, "Please wait...", ToastLength.Short).Show();
             var registerSuccessful = await App.TryRegister(json);
             if (!registerSuccessful)
             {

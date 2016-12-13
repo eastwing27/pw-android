@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using PW.DataTransciever.DTO;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
 
 namespace PW.Android
 {
@@ -25,6 +18,7 @@ namespace PW.Android
 
             FindViewById<TextView>(Resource.Id.txtUserInfo).Text = App.UserInfo;
 
+            //Selecting usernames for autocompleteon list
             await App.UpdateUserList();
             var receivers = App.Users
                 .OrderBy(u => u.Name)
@@ -34,12 +28,14 @@ namespace PW.Android
             var btnSend = FindViewById<Button>(Resource.Id.btnSend);
             btnSend.Click += OnSendClick;
 
+            //Attaching username list
             var edtReceiver = FindViewById<AutoCompleteTextView>(Resource.Id.edtReceiver);
             var acAdapter = new ArrayAdapter(this, 17367050, receivers);
             edtReceiver.Adapter = acAdapter;
 
             var edtAmount = FindViewById<EditText>(Resource.Id.edtAmount);
 
+            //Trying get data from a "template" (if user taps log entry)
             edtReceiver.Text = Intent.GetStringExtra("Receiver") ?? "";
             edtAmount.Text = Intent.GetStringExtra("Amount") ?? "";
 
@@ -49,6 +45,8 @@ namespace PW.Android
         private async void OnSendClick (object sender, EventArgs e)
         {
             var edtReceiver = FindViewById<TextView>(Resource.Id.edtReceiver);
+
+            //Check if user enters correct receiver name
             var receiver = App.Users.FirstOrDefault(u => u.Name == edtReceiver.Text);
             if (receiver == null)
             {
@@ -56,6 +54,7 @@ namespace PW.Android
                 return;
             }
 
+            //Validation transaction amount
             var edtAmount = FindViewById<EditText>(Resource.Id.edtAmount);
             if (string.IsNullOrEmpty(edtAmount.Text))
             {
@@ -69,6 +68,7 @@ namespace PW.Android
                 return;
             }
 
+            //Creation anonymous DTO and its serialization
             var json = JsonConvert.SerializeObject(new
             {
                 SenderId = App.UserId,
@@ -76,6 +76,8 @@ namespace PW.Android
                 Amount = amount
             });
 
+            //Trying to make a transaction
+            Toast.MakeText(this, "Please wait...", ToastLength.Short).Show();
             var sendSuccessful = await App.Service.Send(json);
 
             if (!sendSuccessful)

@@ -1,12 +1,13 @@
 ﻿using Android.App;
-using Android.Widget;
-using Android.OS;
-using Newtonsoft.Json;
 using Android.Content;
+using Android.OS;
+using Android.Widget;
+using Newtonsoft.Json;
 using System;
 
 namespace PW.Android
 {
+    //Here - login page
     [Activity(Label = "Parrot Wings", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
@@ -16,6 +17,7 @@ namespace PW.Android
 
             SetContentView (Resource.Layout.Main);
 
+            //Trying to get some stored values
             var prefs = Application.Context.GetSharedPreferences("PW", FileCreationMode.Private);
             var server = prefs.GetString("Server", "http://pwings.azurewebsites.net");
             var email = prefs.GetString("Email", "");
@@ -29,6 +31,11 @@ namespace PW.Android
             FindViewById<Button>(Resource.Id.button2).Click += OnRegClick;
         }
 
+        /// <summary>
+        /// Open registration page and send it server address if present
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnRegClick(object sender, EventArgs e)
         {
             var regActivity = new Intent(this, typeof(RegActivity));
@@ -44,12 +51,15 @@ namespace PW.Android
 
             App.Initialize(edtServer.Text);
 
+            //Creating anonymous DTO and serializing it
             var json = JsonConvert.SerializeObject(new
             {
                 Email = edtEmail.Text,
                 PasswordHash = edtPassword.Text.GetPasswordHash()
             });
 
+            //Trying to authorize user on server
+            Toast.MakeText(this, "Please wait...", ToastLength.Long).Show();
             var loginSuccessful = await App.TryLogin(json);
 
             if (!loginSuccessful)
@@ -58,6 +68,7 @@ namespace PW.Android
                 return;
             }
 
+            //Is login successful store server name and e-mail
             var prefs = Application.Context.GetSharedPreferences("PW", FileCreationMode.Private);
             var prefEditor = prefs.Edit();
             prefEditor.PutString("Server", edtServer.Text);

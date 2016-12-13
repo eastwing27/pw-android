@@ -5,6 +5,11 @@ namespace PW.Android
 {
     public static class Extender
     {
+        /// <summary>
+        /// Generate MD5 hash using current string
+        /// </summary>
+        /// <param name="Source"></param>
+        /// <returns></returns>
         public static string GetPasswordHash(this string Source)
         {
             var byteArray = Encoding.Unicode.GetBytes(Source);

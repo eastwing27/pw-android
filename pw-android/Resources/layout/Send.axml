@@ -36,37 +36,49 @@
                 android:id="@+id/btnLog" />
         </LinearLayout>
     </Toolbar>
-    <TextView
-        android:text="Do you want to send PW someone?"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
-    <TextView
-        android:text="Start typing:"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
-    <AutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edtReceiver"
-        android:layout_marginBottom="14.5dp" />
-    <TextView
-        android:text="How much?"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3" />
-    <EditText
-        android:inputType="numberSigned"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/edtAmount" />
-    <Button
-        android:text="Send"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSend" />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="482.0dp"
+            android:id="@+id/linearLayout2">
+            <TextView
+                android:text="Do you want to send PW someone?"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView1" />
+            <TextView
+                android:text="Start typing:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtReceiver"
+                android:layout_marginBottom="14.5dp" />
+            <TextView
+                android:text="How much?"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView3" />
+            <EditText
+                android:inputType="numberSigned"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtAmount" />
+            <Button
+                android:text="Send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSend" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -7,12 +7,22 @@ using System.Threading.Tasks;
 
 namespace PW.DataTransciever
 {
+    /// <summary>
+    /// Use instances of this class to send/receive data from PW server
+    /// </summary>
     public class Transceiver
     {
         public string Server { get; set; }
+        /// <summary>
+        /// Stores status message of last exchange operation
+        /// </summary>
         public string StatusMessage { get; private set; }
         private HttpClient client;
 
+        /// <summary>
+        /// Initializes new instance and define server address
+        /// </summary>
+        /// <param name="Server"></param>
         public Transceiver(string Server)
         {
             //User can specify another server for some reason
@@ -27,6 +37,7 @@ namespace PW.DataTransciever
             client = new HttpClient();
         }
 
+        //POST requests
         private async Task<string> Post(string Route, string Body)
         {
             var response = await client.PostAsync($"{Server}/api/{Route}", new StringContent(Body, Encoding.UTF8, "application/json"));
@@ -40,6 +51,7 @@ namespace PW.DataTransciever
             throw new HttpRequestException(response.StatusCode.ToString());
         }
 
+        //GET requests
         private async Task<T> Get<T>(string Route)
         {
             var response = await client.GetAsync($"{Server}/api/{Route}");
@@ -53,6 +65,11 @@ namespace PW.DataTransciever
             throw new HttpRequestException(response.StatusCode.ToString());
         }
 
+        /// <summary>
+        /// Get user name and balance using id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<UserDTO> GetUserInfo(int Id)
         {
             try
@@ -80,6 +97,10 @@ namespace PW.DataTransciever
             }
         }
 
+        /// <summary>
+        /// Gets user list from current server
+        /// </summary>
+        /// <returns></returns>
         public async Task<ReceiverDTO[]> GetUserList()
         {
             try
@@ -93,6 +114,11 @@ namespace PW.DataTransciever
             }
         }
 
+        /// <summary>
+        /// Get transaction history using user id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<TransactDTO[]> GetUserTransactions(int Id)
         {
             try
@@ -110,6 +136,11 @@ namespace PW.DataTransciever
             }
         }
 
+        /// <summary>
+        /// Trying to register new user on specified server
+        /// </summary>
+        /// <param name="RegisterData"></param>
+        /// <returns></returns>
         public async Task<int> Register(string RegisterData)
         {
             try
@@ -128,6 +159,11 @@ namespace PW.DataTransciever
             }
         }
 
+        /// <summary>
+        /// Trying to authenticate user
+        /// </summary>
+        /// <param name="LoginData"></param>
+        /// <returns></returns>
         public async Task<int> Login(string LoginData)
         {
             try
@@ -158,6 +194,11 @@ namespace PW.DataTransciever
             }
         }
 
+        /// <summary>
+        /// Trying to send PW to specified user
+        /// </summary>
+        /// <param name="SendData"></param>
+        /// <returns></returns>
         public async Task<bool> Send (string SendData)
         {
             try

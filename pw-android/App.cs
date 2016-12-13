@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace PW.Android
 {
+    /// <summary>
+    /// Static method providing global properties (such as user name or balance) and send/receive data methods
+    /// </summary>
     public static class App
     {
+        /// <summary>
+        /// DataTransceiver instance directly responsible for data exchange
+        /// </summary>
         public static Transceiver Service { get; private set; }
+
         public static double Balance { get; set; }
         public static int UserId { get; private set; }
         public static string UserName { get; private set; }
